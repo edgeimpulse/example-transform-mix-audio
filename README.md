@@ -2,9 +2,31 @@
 
 This is a transformation block that uses [audiomentations](https://github.com/iver56/audiomentations) library to mix audio files with noise files to a specific SNR.
 
+## How does this block works
+
+The block adds noise to all files from the audio directory. For each audio file, some random noise file is selected and mixed with to an SNR target between min and max values (uniform distribution). For a fixed SNR, use the same value for min and max.
+
+Each new generated sample is applied a label based on the labelling method and extra metadata is also added (generation date, SNR values, original audio and noise files).
+
+### Parameters passed to the block:
+
+* **Path to noise files:** Bucket path/prefix with noise files (ie: /mnt/s3fs/noise_dir/)
+* **Path to audio/clean files:** Bucket path/prefix with audio files (ie: /mnt/s3fs/audio_dir/)
+* **Min SNR:** min SNR value (ie 3.0)
+* **Max SNR:** max SNR value (ie 5.0) 
+* **Labelling method:** 'auto' or 'manual'. If 'auto' is selected, label is extracted from the filename such as _\<label\>.\<rest-of-filename\>.wav_
+* **Label:** will be used only for 'manual' labelling method
+* **Upload to category:** how to split generated samples between training and test sets 
+
+_Synthetic data block config_
+![Synthetic Data Block](images/synthetic-block.png)
+
+_Generated metadata_
+![Metadata](images/metadata.png)
+
 ## How to run (Edge Impulse Studio)
 
-###  Using the Synthetic Data feature (professional & enterprise)
+###  Using the Synthetic Data feature (Enterprise)
 
 You can modify this repository or just push it as a new custom Synthetic Data transformation block.
 
