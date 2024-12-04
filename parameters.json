@@ -1,0 +1,83 @@
+{
+    "version": 1,
+    "type": "synthetic-data",
+    "info": {
+        "name": "Mix Noise Audio Generator",
+        "description": "Mix noise to audio files with SNR targets"
+    },
+    "parameters": [
+        {
+            "name": "Path to noise files",
+            "value": "/mnt/s3fs/noise_dir",
+            "type": "string",
+            "help": "Bucket path/prefix with noise files",
+            "param": "noise-dir"
+        },
+        {
+            "name": "Path to audio/clean files",
+            "value": "/mnt/s3fs/audio_dir",
+            "type": "string",
+            "help": "Bucket path/prefix with audio/clean files",
+            "param": "audio-dir"
+        },
+        {
+            "name": "Min SNR",
+            "value": "3.0",
+            "type": "float",
+            "help": "Min SNR when mixing with noise files",
+            "param": "min-snr"
+        },
+        {
+            "name": "Max SNR",
+            "value": "5.0",
+            "type": "float",
+            "help": "Max SNR when mixing with noise files",
+            "param": "max-snr"
+        },
+        {
+            "name": "Labelling method",
+            "value": "manual",
+            "type": "select",
+            "valid": [
+                {
+                    "label": "Extract label from filename",
+                    "value": "auto"
+                },
+                {
+                    "label": "Label is set manually",
+                    "value": "manual"
+                }
+            ],
+            "help": "Labelling method ('auto' will extract label from filename such as <label>.<rest-of-filename>.wav)",
+            "param": "labelling-method"
+        },
+        {
+            "name": "Label",
+            "value": "empty",
+            "type": "string",
+            "help": "Label for the audio samples, only if labelling method is set to 'manual'",
+            "param": "label"
+        },
+        {
+            "name": "Upload to category",
+            "value": "split",
+            "type": "select",
+            "valid": [
+                {
+                    "label": "Split 80/20 between training and testing",
+                    "value": "split"
+                },
+                {
+                    "label": "Training",
+                    "value": "training"
+                },
+                {
+                    "label": "Testing",
+                    "value": "testing"
+                }
+            ],
+            "help": "Data will be uploaded to this category in your project",
+            "param": "upload-category"
+        }
+    ]
+}
