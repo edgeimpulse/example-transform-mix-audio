@@ -8,6 +8,7 @@ RUN apt-get update && apt-get install -y libsndfile1
 COPY requirements.txt ./
 RUN pip3 --no-cache-dir install -r requirements.txt
 
-COPY . ./
+COPY parameters.json ./
+COPY transform.py ./
 
 ENTRYPOINT [ "python3", "-u", "transform.py" ]

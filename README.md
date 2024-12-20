@@ -83,11 +83,18 @@ First, copy noise and audio files to _input/_ subdirectories.
 docker build -t mix-audio-block .
 ```
 
-2. Run the container and provide your Edge Impulse Project API Key:
+2. Run the container and provide your Edge Impulse Project API Key to upload to your Edge Impulse project:
 
 ```
-docker run --rm -it -v $PWD:/app -e EI_PROJECT_API_KEY='YOUR_API_KEY' mix-audio-block --noise-dir input/noise_dir --audio-dir input/audio_dir --min-snr 3.0 --max-snr 5.0 --labelling-method auto
+docker run --rm -it -v $PWD/input:/app/input -e EI_PROJECT_API_KEY='YOUR_API_KEY' mix-audio-block --noise-dir input/noise_dir --audio-dir input/audio_dir --min-snr 3.0 --max-snr 5.0 --labelling-method auto
 ```
+
+**_Write files locally:_** to write files locally instead of pushing them to Studio, use the following command:
+
+```
+docker run --rm -it -v $PWD/input:/app/input -v $PWD/output:/app/output mix-audio-block --noise-dir input/noise_dir --audio-dir input/audio_dir --min-snr 3.0 --max-snr 5.0 --labelling-method auto --skip-upload
+```
+
 
 3. Generated files will be sent to your Edge Impulse project, including metadata.
 
